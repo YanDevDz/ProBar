@@ -45,7 +45,9 @@ var probar = new ProBar(options);
     bgColor : "#efefef", // color background of the Progress bar
     speed 0.3, // speed of animation. ( unit in secondes )
     wrapper : "body", // the wrapper who append ProBar. if class ".class" ,if id "#id" 
-    finishAnimation : true || false  // config a finish animation. 
+    finishAnimation : true || false,  // config a finish animation. 
+    classNameBar : "setBar", // change a class to a custom class ( for Css ).
+    wrapperId : "wrapperSetBar" // change a wrapper id for a custom Css.
 }
 ```
 
@@ -62,7 +64,6 @@ probar.goto(100,2000); // reach 100% in 2 secondes.
 
 #### Upcoming features 
 
- - Add Multiple Instantiation.
  - Remove JQuery requirement.
 
 License
