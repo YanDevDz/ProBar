@@ -5,6 +5,7 @@
 	let wrapper_color = "#ecf0f1";
 	let speedAnimation = 0.3; // in seconds
 	let wrapper = "body"; // default value of appending.
+	let finishAnimation = true;
 
 	////////////////////
 	// all functions. //
@@ -17,11 +18,13 @@
 		if(options.bgColor) { wrapper_color = options.bgColor };
 		if(options.speed) { speedAnimation = options.speed };
 		if(options.wrapper) { wrapper = options.wrapper };
+		if(options.finishAnimation) { finishAnimation = options.finishAnimation };
 
 		let ProBar = {
           setSpeed,
           setColor,
           setWrapperColor,
+          setFinishAnimation,
           goto: function (percent,time = null) {
           	if(time != null) {setSpeed(time)}
           	move(percent);
@@ -36,6 +39,13 @@
 				width: percent+"%",
 				transition : "width "+speedAnimation+"s"
 			});
+			// verify if is 100%
+			if(finishAnimation) {
+				$(".progressBar").css({
+					height: "0px",
+					transition : "height 0.3s"
+				});
+			}
 		}
 		function setSpeed(speed){
 			speedAnimation = speed;
@@ -48,6 +58,12 @@
 		}
 		function setWrapperColor(color){
 			wrapper_color = color;
+			$("#wrapper-progressBar").css({ 
+				"background-color" : wrapper_color
+			});
+		}
+		function setFinishAnimation(boolean){
+			finishAnimation = boolean;
 			$("#wrapper-progressBar").css({ 
 				"background-color" : wrapper_color
 			});
