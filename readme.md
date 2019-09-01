@@ -8,6 +8,7 @@ ProBar is a progress bar with multiple options.
   - config a ProBar background.
   - config a Speed of ProBar.
   - config a "Goto" option with timing.
+  - config a Finish animation.
   - cutomize with your own CSS.
 
 ### Requirement
@@ -43,7 +44,8 @@ var probar = new ProBar(options);
     color : "#2a2a2a", // color of the Progress bar. 
     bgColor : "#efefef", // color background of the Progress bar
     speed 0.3, // speed of animation. ( unit in secondes )
-    wrapper : "body" // the wrapper who append ProBar. if class ".class" ,if id "#id" 
+    wrapper : "body", // the wrapper who append ProBar. if class ".class" ,if id "#id" 
+    finishAnimation : true || false  // config a finish animation. 
 }
 ```
 
@@ -53,6 +55,7 @@ var probar = new ProBar(options);
 probar.setColor("#2980b9"); // change color of ProBar.
 probar.setWrapperColor("#ecf0f1"); // change background color of ProBar.
 probar.setSpeed(3000); // change Speed to 3 secondes.
+probar.setFinishAnimation(false); // set animation to false.
 probar.goto(100); // reach 100%.
 probar.goto(100,2000); // reach 100% in 2 secondes.
 ```

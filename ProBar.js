@@ -77,9 +77,6 @@
 		}
 		function setFinishAnimation(boolean){
 			finishAnimation = boolean;
-			$("#wrapper-progressBar").css({ 
-				"background-color" : wrapper_color
-			});
 		}
 		return ProBar;
 	}	
