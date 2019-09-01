@@ -35,17 +35,30 @@
 
 		// move the bar
 		function move(percent){
+
 			$(".progressBar").css({
 				width: percent+"%",
 				transition : "width "+speedAnimation+"s"
 			});
+
+			$("#wrapper-progressBar").css({
+				"height": "5px"
+			});
+
 			// verify if is 100%
-			if(finishAnimation) {
-				$(".progressBar").css({
-					height: "0px",
-					transition : "height 0.3s"
-				});
-			}
+			setTimeout(function(){
+				if(percent == 100 && finishAnimation) {
+					console.log("je vais faire l'animation bro");
+					$("#wrapper-progressBar").css({
+						"height": "0px",
+						"transition" : "all 0.3s"
+					});
+					// reset bar to zero.
+					$(".progressBar").css({
+						width: "0%"
+					});
+				}
+			},speedAnimation * 1000);
 		}
 		function setSpeed(speed){
 			speedAnimation = speed;
@@ -81,7 +94,8 @@
 			#wrapper-progressBar {
 				width : 100%;
 				height : 5px;
-				background-color : ${wrapper_color}
+				background-color : ${wrapper_color};
+    			overflow: hidden;
 			}
 		`;
 
