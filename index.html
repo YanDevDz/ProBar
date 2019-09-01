@@ -1,15 +1,135 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Progress bar</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>ProBar - Progress bar</title>
+	<!-- bootstrap css -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css?family=Manjari:100,700&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		* {
+			font-family: 'Manjari', sans-serif;
+		}
+		h1 {
+			font-weight: bold;font-size: 50px;
+		}
+		.wrapper {
+			text-align: center;
+			margin-top: 35px;
+		}
+		.firstSection {
+			border: 2px solid!important;
+			font-weight: 700!important;
+			padding: 10px 25px!important;
+		}
+		.secondSection {
+			display: inline-block;
+			border: 2px solid!important;
+			font-weight: 700!important;
+			padding: 10px 25px!important;
+		}
+		.title {
+			margin-top: 35px;
+			font-weight: 700;
+		}
+	</style>
 </head>
 <body>
 	
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 wrapper">
+			<h1>Probar</h1>
+		</div>
+		<div class="col-lg-12 wrapper">
+			<h5>A progress bar with multiple options.</h5>
+			<p>for all the people who do not have the time.. 😜</p>
+		</div>
+		<div class="col-lg-12 wrapper">
+			<div class="row">
+				<div class="col-lg-4">
+					<button type="button" class="btn btn-outline-dark firstSection" onclick='javascript:probar.goto(50);'>
+						probar.goto(50)
+					</button>
+				</div>
+				<div class="col-lg-4">
+					<button type="button" class="btn btn-outline-dark firstSection" onclick='javascript:probar.goto(75);'>
+						probar.goto(75)
+					</button>
+				</div>
+				<div class="col-lg-4">
+					<button type="button" class="btn btn-outline-dark firstSection" onclick='javascript:probar.goto(100);'>
+						probar.goto(100)
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12 wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h4 class="title">
+						Customize your Probar
+					</h4>
+				</div>
+				<div class="col-lg-5">
+					<div class="col-lg-12">
+						<div class="wrapperTimer"></div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<button type="button" class="btn btn-outline-dark secondSection" onclick="javascript:timebar.goto(30)">
+								.goto(50)
+							</button>
+						</div>
+						<div class="col-lg-4">
+							<button type="button" class="btn btn-outline-dark secondSection" onclick="javascript:timebar.goto(50)">
+								.goto(75)
+							</button>
+						</div>
+						<div class="col-lg-4">
+							<button type="button" class="btn btn-outline-dark secondSection" onclick="javascript:timebar.goto(100)">
+								.goto(100)
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="offset-lg-2 col-lg-5">
+					<div class="row">
+						<div class="col-lg-4">
+							<button type="button" class="btn btn-outline-dark secondSection" id="btnFirst">
+								.goto(50)
+							</button>
+						</div>
+						<div class="col-lg-4">
+							<button type="button" class="btn btn-outline-dark secondSection" id="btnSecond">
+								.goto(75)
+							</button>
+						</div>
+						<div class="col-lg-4">
+							<button type="button" class="btn btn-outline-dark secondSection" id="btnThird">
+								.goto(100)
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
 <!-- Require Jquery -->
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <!-- Require ProBar.js -->
 <script src="ProBar.js"></script>
@@ -24,10 +144,22 @@
 	    wrapper : "body", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
 	    finishAnimation : true // default "true", this option give you a animation at the end "100%".
 	};
+
+	// options
+	var optionsTimer = {
+	    color   : "red", // color of the Progress bar. 
+	    bgColor : "#efefef", // color background of the Progress bar
+	    speed   : 0.3, // speed of animation. ( unit in secondes )
+	    wrapper : ".wrapperTimer", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
+	    finishAnimation : true // default "true", this option give you a animation at the end "100%".
+	};
 	
 	// instantiate.
 	var probar = new ProBar(options);
-	probar.goto(100,3);
+	var timebar = new ProBar(optionsTimer);
+
+	probar.goto(25);
+	timebar.goto(30);
 
 	
 	///////////////////

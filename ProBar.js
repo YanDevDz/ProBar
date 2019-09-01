@@ -1,94 +1,101 @@
 (function (root) {
 	"use strict";
 
-	let colorBar = "#2a2a2a";
-	let wrapper_color = "#ecf0f1";
-	let speedAnimation = 0.3; // in seconds
-	let wrapper = "body"; // default value of appending.
-	let finishAnimation = true;
-
 	////////////////////
 	// all functions. //
 	////////////////////
 	// first class instantiation.
 	function proBar(options){
+
+		this.colorBar = "#2a2a2a";
+		this.wrapper_color = "#ecf0f1";
+		this.speedAnimation = 0.3; // in seconds
+		this.wrapper = "body"; // default value of appending.
+		this.finishAnimation = true;
+		this.classNameBar = "progressBar"; // default.
+		this.wrapperId = "wrapper-progressBar"; // default.
+
 		options = options || {};
 
-		if(options.color) { colorBar = options.color };
-		if(options.bgColor) { wrapper_color = options.bgColor };
-		if(options.speed) { speedAnimation = options.speed };
-		if(options.wrapper) { wrapper = options.wrapper };
-		if(options.finishAnimation) { finishAnimation = options.finishAnimation };
+		if(options.color) { this.colorBar = options.color };
+		if(options.bgColor) { this.wrapper_color = options.bgColor };
+		if(options.speed) { this.speedAnimation = options.speed };
+		if(options.wrapper) { this.wrapper = options.wrapper };
+		if(options.finishAnimation) { this.finishAnimation = options.finishAnimation };
+		this.classNameBar = Math.random().toString(36).substr(2, 9);
+		this.wrapperId = Math.random().toString(36).substr(2, 8);
 
+	    createBar(this.wrapper,this.classNameBar,this.colorBar,this.wrapperId,this.wrapper_color);
+
+		// move the bar
+		this.move = (percent) => {
+
+			$("."+this.classNameBar).css({
+				width: percent+"%",
+				transition : "width "+this.speedAnimation+"s"
+			});
+
+			$("#"+this.wrapperId).css({
+				"height": "5px"
+			});
+
+			// verify if is 100%
+			setTimeout(() => {
+				if(percent == 100 && this.finishAnimation) {
+					console.log("je vais faire l'animation bro");
+					$("#"+this.wrapperId).css({
+						"height": "0px",
+						"transition" : "all 0.3s"
+					});
+					// reset bar to zero.
+					$("."+this.classNameBar).css({
+						width: "0%"
+					});
+				}
+			},this.speedAnimation * 1000);
+		}
+		var setSpeed = (speed) => {
+			this.speedAnimation = speed;
+		}
+		var setColor = (color) => {
+			this.colorBar = color;
+			$("."+this.classNameBar).css({ 
+				"background-color" : this.colorBar
+			});
+		}
+		var setWrapperColor = (color) => {
+			this.wrapper_color = color;
+			$("#"+this.wrapperId).css({ 
+				"background-color" : this.wrapper_color
+			});
+		}
+		var setFinishAnimation = (boolean) => {
+			this.finishAnimation = boolean;
+		}
+		
 		let ProBar = {
           setSpeed,
           setColor,
           setWrapperColor,
           setFinishAnimation,
-          goto: function (percent,time = null) {
+          goto: (percent,time = null) => {
           	if(time != null) {setSpeed(time)}
-          	move(percent);
+          	this.move(percent);
           }
         };
 
-		createBar(wrapper);
-
-		// move the bar
-		function move(percent){
-
-			$(".progressBar").css({
-				width: percent+"%",
-				transition : "width "+speedAnimation+"s"
-			});
-
-			$("#wrapper-progressBar").css({
-				"height": "5px"
-			});
-
-			// verify if is 100%
-			setTimeout(function(){
-				if(percent == 100 && finishAnimation) {
-					console.log("je vais faire l'animation bro");
-					$("#wrapper-progressBar").css({
-						"height": "0px",
-						"transition" : "all 0.3s"
-					});
-					// reset bar to zero.
-					$(".progressBar").css({
-						width: "0%"
-					});
-				}
-			},speedAnimation * 1000);
-		}
-		function setSpeed(speed){
-			speedAnimation = speed;
-		}
-		function setColor(color){
-			colorBar = color;
-			$(".progressBar").css({ 
-				"background-color" : colorBar
-			});
-		}
-		function setWrapperColor(color){
-			wrapper_color = color;
-			$("#wrapper-progressBar").css({ 
-				"background-color" : wrapper_color
-			});
-		}
-		function setFinishAnimation(boolean){
-			finishAnimation = boolean;
-		}
 		return ProBar;
 	}	
 
-	var createBar = (element) => {
+
+	var createBar = ( element,classNameBar,colorBar,wrapperId,wrapper_color ) => {
 		var Css = `
-			.progressBar {
+			.${classNameBar} {
 				width : 0px;
 				height : 5px;
 				background-color: ${colorBar};
 			}
-			#wrapper-progressBar {
+			#${wrapperId} {
 				width : 100%;
 				height : 5px;
 				background-color : ${wrapper_color};
@@ -96,8 +103,8 @@
 			}
 		`;
 
-		var htmlBar = `<div id="wrapper-progressBar"><div class="progressBar"></div></div>`;
-		$(wrapper).prepend(htmlBar);
+		var htmlBar = `<div id="${wrapperId}"><div class="${classNameBar}"></div></div>`;
+		$(element).prepend(htmlBar);
 		$("head").append(`
 			<style>
 				${Css}
