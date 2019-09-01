@@ -34,6 +34,20 @@
 			margin-top: 35px;
 			font-weight: 700;
 		}
+		a {
+			color : #2c3e50;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css">
+
+
+	<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
+	<style type="text/css">
+		.hljs {
+			border-radius: 8px;
+			padding-left: 25px;
+		}
 	</style>
 </head>
 <body>
@@ -68,53 +82,116 @@
 		</div>
 		<div class="col-lg-12 wrapper">
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="offset-lg-2 col-lg-8">
 					<h4 class="title">
 						Customize your Probar
 					</h4>
 				</div>
-				<div class="col-lg-5">
-					<div class="col-lg-12">
-						<div class="wrapperTimer"></div>
-					</div>
-					<div class="row">
-						<div class="col-lg-4">
-							<button type="button" class="btn btn-outline-dark secondSection" onclick="javascript:timebar.goto(30)">
-								.goto(50)
-							</button>
-						</div>
-						<div class="col-lg-4">
-							<button type="button" class="btn btn-outline-dark secondSection" onclick="javascript:timebar.goto(50)">
-								.goto(75)
-							</button>
-						</div>
-						<div class="col-lg-4">
-							<button type="button" class="btn btn-outline-dark secondSection" onclick="javascript:timebar.goto(100)">
-								.goto(100)
-							</button>
-						</div>
-					</div>
+				<div class="offset-lg-2 col-lg-8" style="text-align: left;margin-top: 35px;">
+					<h6>Configuration with time ( in seconds ) : </h6>
 				</div>
-				<div class="offset-lg-2 col-lg-5">
-					<div class="row">
-						<div class="col-lg-4">
-							<button type="button" class="btn btn-outline-dark secondSection" id="btnFirst">
-								.goto(50)
-							</button>
-						</div>
-						<div class="col-lg-4">
-							<button type="button" class="btn btn-outline-dark secondSection" id="btnSecond">
-								.goto(75)
-							</button>
-						</div>
-						<div class="col-lg-4">
-							<button type="button" class="btn btn-outline-dark secondSection" id="btnThird">
-								.goto(100)
-							</button>
-						</div>
-					</div>
+				<div class="offset-lg-2 col-lg-8" style="padding: 15px 0px 35px 0px;">
+					<div class="wrapperTimer"></div>
 				</div>
+			</div>
+			<div class="row" >
+				<div class="offset-lg-2 col-lg-2">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="timebar.goto(30,1)">
+						.goto(30,1)
+					</button>
+				</div>
+				<div class="col-lg-2">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="timebar.goto(75,2)">
+						.goto(75,2)
+					</button>
+				</div>
+				<div class="col-lg-2">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="timebar.goto(100,3)">
+						.goto(100,3)
+					</button>
+				</div>
+				<div class="col-lg-2">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="timebar.goto(0,10)">
+						.goto(0,10)
+					</button>
+				</div>
+			</div>
+			
 
+			<!-- second -->
+			<div class="row" style="margin-top: 80px;">
+				<div class="offset-lg-2 col-lg-8" style="text-align: left;">
+					<h6>Configuration colors : </h6>
+				</div>
+				<div class="offset-lg-2 col-lg-8" style="padding: 15px 0px 35px 0px;">
+					<div class="wrapperSetBar"></div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 25px;margin-bottom: 50px;">
+				<div class="offset-lg-2 col-lg-3">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="setbar.setColor('#2c3e50')">
+						.setColor("#2c3e50")
+					</button>
+				</div>
+				<div class="col-lg-3">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="setbar.setWrapperColor('#7f8c8d')">
+						.setWrapperColor("#7f8c8d")
+					</button>
+				</div>
+				<div class="col-lg-2">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="setbar.setColor('#f1c40f');setbar.setWrapperColor('#efefef');">
+						reset
+					</button>
+				</div>
+			</div>
+
+
+			<!-- third -->
+			<div class="row">
+				<div class="col-lg-12">
+					<h4 class="title" style="text-align: left;">
+						Exemple :
+					</h4>
+				</div>
+				<div class="col-lg-12">
+					<pre style="    text-align: left;">
+						<code class="javascript">
+// options
+var options = {
+    color   : "#09b1ba", // color of the Progress bar. 
+    bgColor : "#efefef", // color background of the Progress bar
+    speed   : 0.3, // speed of animation. ( unit in secondes )
+    wrapper : ".wrapper", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
+    finishAnimation : false, // default "true", this option give you a animation at the end "100%".
+    classNameBar : "proBar",
+    wrapperId : "wrapperProBar"
+};
+
+// instantiate
+var probar = new ProBar(options);
+
+// use it.
+probar.goto(25);
+
+// all configuration.
+probar.setColor("#2980b9"); // change color of ProBar.
+probar.setWrapperColor("#ecf0f1"); // change background color of ProBar.
+probar.setSpeed(3000); // change Speed to 3 secondes.
+probar.goto(100); // reach 100%.
+probar.goto(100,2000); // reach 100% in 2 secondes
+probar.setFinishAnimation(false); // remove a finish animation.
+						</code>
+					</pre>
+				</div>
+			</div>
+
+			<!-- footer -->
+			<div class="row">
+				<div class="col-lg-12">
+					<h4 class="title">
+						Fork me on <a href="https://github.com/YanDevDz/ProBar"><i class="fab fa-github-alt"></i> Github</a>
+					</h4>
+				</div>
 			</div>
 		</div>
 
@@ -131,14 +208,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+<!-- highlighted -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+
 <!-- Require ProBar.js -->
 <script src="ProBar.js"></script>
 
 <!-- script -->
 <script>
+	hljs.initHighlightingOnLoad();
 	// options
 	var options = {
-	    color   : "#2a2a2a", // color of the Progress bar. 
+	    color   : "#e74c3c", // color of the Progress bar. 
 	    bgColor : "#efefef", // color background of the Progress bar
 	    speed   : 0.3, // speed of animation. ( unit in secondes )
 	    wrapper : "body", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
@@ -147,19 +228,33 @@
 
 	// options
 	var optionsTimer = {
-	    color   : "red", // color of the Progress bar. 
+	    color   : "#09b1ba", // color of the Progress bar. 
 	    bgColor : "#efefef", // color background of the Progress bar
 	    speed   : 0.3, // speed of animation. ( unit in secondes )
 	    wrapper : ".wrapperTimer", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
-	    finishAnimation : true // default "true", this option give you a animation at the end "100%".
+	    finishAnimation : false, // default "true", this option give you a animation at the end "100%".
+	    classNameBar : "timer",
+	    wrapperId : "wrapperTimerId"
+	};
+	// options
+	var optionsSetBar = {
+	    color   : "#f1c40f", // color of the Progress bar. 
+	    bgColor : "#efefef", // color background of the Progress bar
+	    speed   : 0.3, // speed of animation. ( unit in secondes )
+	    wrapper : ".wrapperSetBar", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
+	    finishAnimation : false, // default "true", this option give you a animation at the end "100%".
+	    classNameBar : "setBar",
+	    wrapperId : "wrapperSetBar"
 	};
 	
 	// instantiate.
 	var probar = new ProBar(options);
 	var timebar = new ProBar(optionsTimer);
+	var setbar = new ProBar(optionsSetBar);
 
 	probar.goto(25);
 	timebar.goto(30);
+	setbar.goto(50);
 
 	
 	///////////////////

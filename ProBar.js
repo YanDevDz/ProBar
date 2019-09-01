@@ -15,15 +15,15 @@
 		this.classNameBar = "progressBar"; // default.
 		this.wrapperId = "wrapper-progressBar"; // default.
 
-		options = options || {};
+		this.options = options || {};
 
-		if(options.color) { this.colorBar = options.color };
-		if(options.bgColor) { this.wrapper_color = options.bgColor };
-		if(options.speed) { this.speedAnimation = options.speed };
-		if(options.wrapper) { this.wrapper = options.wrapper };
-		if(options.finishAnimation) { this.finishAnimation = options.finishAnimation };
-		this.classNameBar = Math.random().toString(36).substr(2, 9);
-		this.wrapperId = Math.random().toString(36).substr(2, 8);
+		if(this.options.color) { this.colorBar = this.options.color }
+		if(this.options.bgColor) { this.wrapper_color = this.options.bgColor }
+		if(this.options.speed) { this.speedAnimation = this.options.speed }
+		if(this.options.wrapper) { this.wrapper = this.options.wrapper }
+		if(this.options.finishAnimation == false) { this.finishAnimation = this.options.finishAnimation;}
+		if(this.options.classNameBar) { this.classNameBar = this.options.classNameBar }
+		if(this.options.wrapperId) { this.wrapperId = this.options.wrapperId }
 
 	    createBar(this.wrapper,this.classNameBar,this.colorBar,this.wrapperId,this.wrapper_color);
 
@@ -41,7 +41,13 @@
 
 			// verify if is 100%
 			setTimeout(() => {
-				if(percent == 100 && this.finishAnimation) {
+				console.log("********************************");
+				console.log(this.finishAnimation);
+				console.log(percent == 100);
+				console.log(percent == 100 && this.finishAnimation == true);
+				console.log("********************************");
+
+				if(percent == 100 && this.finishAnimation == true) {
 					console.log("je vais faire l'animation bro");
 					$("#"+this.wrapperId).css({
 						"height": "0px",
