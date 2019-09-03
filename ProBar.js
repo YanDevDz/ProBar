@@ -21,6 +21,12 @@
 			bottomLeft : 0,
 			bottomRight : 0
 		};
+		this.roundedInternal = { // by default All is on Zero.
+			topLeft : 0,
+			topRight : 0,
+			bottomLeft : 0,
+			bottomRight : 0
+		}
 
 		this.options = options || {};
 
@@ -36,12 +42,16 @@
 		if(this.options.classNameBar) { this.classNameBar = this.options.classNameBar }
 		if(this.options.wrapperId) { this.wrapperId = this.options.wrapperId }
 		if(this.options.rounded) { 
-			
 			this.rounded.topLeft = this.options.rounded.topLeft || 0;
 			this.rounded.topRight = this.options.rounded.topRight || 0;
 			this.rounded.bottomLeft = this.options.rounded.bottomLeft || 0;
 			this.rounded.bottomRight = this.options.rounded.bottomRight || 0;
-
+		}
+		if(this.options.roundedInternal) { 
+			this.roundedInternal.topLeft = this.options.roundedInternal.topLeft || 0;
+			this.roundedInternal.topRight = this.options.roundedInternal.topRight || 0;
+			this.roundedInternal.bottomLeft = this.options.roundedInternal.bottomLeft || 0;
+			this.roundedInternal.bottomRight = this.options.roundedInternal.bottomRight || 0;
 		}
 
 		// create Bar.
@@ -52,7 +62,8 @@
 	    		this.colorBar,
 	    		this.wrapperId,
 	    		this.wrapper_color,
-	    		this.rounded
+	    		this.rounded,
+	    		this.roundedInternal
 	    		);
 
 		// move the bar
@@ -66,7 +77,7 @@
 			// if animation is true, reInitializate Probar.
 			if(this.finishAnimation == true) {
 				$("#"+this.wrapperId).css({
-					"height": "5px"
+					"height": this.height+"px"
 				});
 			}
 
@@ -117,6 +128,20 @@
 				"border-bottom-right-radius" : this.rounded.bottomRight+'px'
 			});
 		}
+		var setRoundedInternal = (topLeft = 0,topRight = 0,bottomLeft = 0,bottomRight = 0) => {
+
+			this.roundedInternal.topLeft = topLeft || 0;
+			this.roundedInternal.topRight = topRight || 0;
+			this.roundedInternal.bottomLeft = bottomLeft || 0;
+			this.roundedInternal.bottomRight = bottomRight || 0;
+
+			$("."+this.classNameBar).css({ 
+				"border-top-left-radius" : this.roundedInternal.topLeft+'px',
+				"border-top-right-radius" : this.roundedInternal.topRight+'px',
+				"border-bottom-left-radius" : this.roundedInternal.bottomLeft+'px',
+				"border-bottom-right-radius" : this.roundedInternal.bottomRight+'px'
+			});
+		}
 		var setHeight = (height = 5) => {
 			this.height = height;
 			$("#"+this.wrapperId).css({ 
@@ -134,6 +159,7 @@
           setWrapperColor,
           setFinishAnimation,
           setRounded,
+          setRoundedInternal,
           goto: (percent,time = null) => {
           	if(time != null) {setSpeed(time)}
           	this.move(percent);
@@ -144,13 +170,14 @@
 	}	
 
 
-	var createBar = ( element,classNameBar,height,colorBar,wrapperId,wrapper_color,rounded ) => {
+	var createBar = ( element,classNameBar,height,colorBar,wrapperId,wrapper_color,rounded,roundedInternal ) => {
 		console.log("la hauteur est de "+height);
 		var Css = `
 			.${classNameBar} {
 				width : 0px;
 				height : ${height}px;
 				background-color: ${colorBar};
+    			border-radius : ${roundedInternal.topLeft}px ${roundedInternal.topRight}px ${roundedInternal.bottomLeft}px ${roundedInternal.bottomRight}px;
 			}
 			#${wrapperId} {
 				width : 100%;

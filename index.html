@@ -211,6 +211,39 @@
 					</button>
 				</div>
 			</div>
+			<!-- rounded internal -->
+			<!-- rounded internal -->
+			<!-- rounded internal -->
+			<div class="row" style="margin-top: 80px;">
+				<div class="offset-lg-2 col-lg-8" style="text-align: left;">
+					<h6>Configuration With rounded Corners ( Internal ) : </h6>
+				</div>
+				<div class="offset-lg-2 col-lg-8" style="padding: 15px 0px 35px 0px;">
+					<div class="wrapperSetBarRoundedInternal"></div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 25px;margin-bottom: 50px;">
+				<div class="col-lg-3">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="setbarRoundedInternal.setRoundedInternal(50)">
+						.setRoundedInternal(50)
+					</button>
+				</div>
+				<div class="col-lg-3">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="setbarRoundedInternal.setRoundedInternal(50,50)">
+						.setRoundedInternal(5,5)
+					</button>
+				</div>
+				<div class="col-lg-3">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="setbarRoundedInternal.setRoundedInternal(50,50,50);">
+						.setRoundedInternal(5,5,5)
+					</button>
+				</div>
+				<div class="col-lg-3">
+					<button type="button" class="btn btn-outline-dark secondSection" onclick="setbarRoundedInternal.setRoundedInternal(50,50,50,50);">
+						.setRoundedInternal(5,5,5,5)
+					</button>
+				</div>
+			</div>
 
 			<!-- third -->
 			<div class="row">
@@ -237,6 +270,12 @@ var options = {
     	topRight : 25,
     	bottomLeft : 25,
     	bottomRight : 25 
+    },
+    roundedInternal : { // use it to round Corners of Probar Internaly.
+    	topLeft : 25,
+    	topRight : 25,
+    	bottomLeft : 25,
+    	bottomRight : 25 
     }
 };
 
@@ -255,6 +294,7 @@ probar.goto(100,2000); // reach 100% in 2 secondes
 probar.setFinishAnimation(false); // remove a finish animation.
 probar.setHeight(15); // set Height to 15px.
 probar.setRounded(15,15,15,15); // change Border radius of Probar. (topLeft, topRight, bottomLeft, bottomRight);
+probar.setRoundedInternal(15,15,15,15); // change Border radius of Probar Internel. (topLeft, topRight, bottomLeft, bottomRight);
 						</code>
 					</pre>
 				</div>
@@ -349,6 +389,33 @@ probar.setRounded(15,15,15,15); // change Border radius of Probar. (topLeft, top
 	    	bottomLeft : 25,
 	    	bottomRight : 25 
 	    }
+
+	};
+	// options
+	var optionsSetBarRoundedInternal = {
+	    color   : "#273c75", // color of the Progress bar. 
+	    bgColor : "#718093", // color background of the Progress bar
+	    speed   : 0.3, // speed of animation. ( unit in secondes )
+	    wrapper : ".wrapperSetBarRoundedInternal", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
+	    finishAnimation : false, // default "true", this option give you a animation at the end "100%".
+	    classNameBar : "setBarRoundedInternal",
+	    wrapperId : "wrapperSetBarRoundedInternal",
+	    height:10, // give a height to Probar.
+	    
+	    rounded : {
+	    	topLeft : 25,
+	    	topRight : 25,
+	    	bottomLeft : 25,
+	    	bottomRight : 25 
+	    },
+
+	    roundedInternal : {
+	    	topLeft : 25,
+	    	topRight : 25,
+	    	bottomLeft : 25,
+	    	bottomRight : 25 
+	    }
+
 	};
 	
 	// instantiate.
@@ -357,12 +424,14 @@ probar.setRounded(15,15,15,15); // change Border radius of Probar. (topLeft, top
 	var setbar = new ProBar(optionsSetBar);
 	var setbarHeight = new ProBar(optionsSetBarHeight);
 	var setbarRounded = new ProBar(optionsSetBarRounded);
+	var setbarRoundedInternal = new ProBar(optionsSetBarRoundedInternal);
 
 	probar.goto(25);
 	timebar.goto(30);
 	setbar.goto(50);
 	setbarHeight.goto(35);
 	setbarRounded.goto(80);
+	setbarRoundedInternal.goto(75);
 
 	
 	///////////////////
