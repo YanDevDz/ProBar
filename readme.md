@@ -12,6 +12,7 @@ ProBar is a progress bar with multiple options.
   - cutomize with your own CSS.
   - config a Height of Probar.
   - config a Rounded Corners of Probar. 
+  - config a Rounded Corners of Probar in Internal. 
 
 ### Requirement
 
@@ -56,6 +57,12 @@ var probar = new ProBar(options);
       topRight : 25,
       bottomLeft : 25,
       bottomRight : 25 
+    },
+    roundedInternal : { // use it to round Corners of Probar (internal).
+      topLeft : 25,
+      topRight : 25,
+      bottomLeft : 25,
+      bottomRight : 25 
     }
 }
 ```
@@ -71,6 +78,7 @@ probar.goto(100); // reach 100%.
 probar.goto(100,2000); // reach 100% in 2 secondes.
 probar.setHeight(15); // set Height to 15px.
 probar.setRounded(15,15,15,15); // change Border radius of Probar. (topLeft, topRight, bottomLeft, bottomRight);
+probar.setRoundedInternal(15,15,15,15); // change Border radius of Probar (Internal). (topLeft, topRight, bottomLeft, bottomRight);
 ```
 
 #### Upcoming features 
