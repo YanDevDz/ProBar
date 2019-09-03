@@ -7,6 +7,7 @@
 	// first class instantiation.
 	function proBar(options){
 
+		this.height = 5; // 5px by default.
 		this.colorBar = "#2a2a2a";
 		this.wrapper_color = "#ecf0f1";
 		this.speedAnimation = 0.3; // in seconds
@@ -14,18 +15,46 @@
 		this.finishAnimation = true;
 		this.classNameBar = "progressBar"; // default.
 		this.wrapperId = "wrapper-progressBar"; // default.
+		this.rounded = { // by default All is on Zero.
+			topLeft : 0,
+			topRight : 0,
+			bottomLeft : 0,
+			bottomRight : 0
+		};
 
 		this.options = options || {};
 
+
 		if(this.options.color) { this.colorBar = this.options.color }
+		if(this.options.height) { 
+			console.log(this.options.height);
+			this.height = this.options.height; 
+		}
 		if(this.options.bgColor) { this.wrapper_color = this.options.bgColor }
 		if(this.options.speed) { this.speedAnimation = this.options.speed }
 		if(this.options.wrapper) { this.wrapper = this.options.wrapper }
 		if(this.options.finishAnimation == false) { this.finishAnimation = this.options.finishAnimation;}
 		if(this.options.classNameBar) { this.classNameBar = this.options.classNameBar }
 		if(this.options.wrapperId) { this.wrapperId = this.options.wrapperId }
+		if(this.options.rounded) { 
+			
+			this.rounded.topLeft = this.options.rounded.topLeft || 0;
+			this.rounded.topRight = this.options.rounded.topRight || 0;
+			this.rounded.bottomLeft = this.options.rounded.bottomLeft || 0;
+			this.rounded.bottomRight = this.options.rounded.bottomRight || 0;
 
-	    createBar(this.wrapper,this.classNameBar,this.colorBar,this.wrapperId,this.wrapper_color);
+		}
+
+		// create Bar.
+	    createBar(
+	    		this.wrapper,
+	    		this.classNameBar,
+	    		this.height,
+	    		this.colorBar,
+	    		this.wrapperId,
+	    		this.wrapper_color,
+	    		this.rounded
+	    		);
 
 		// move the bar
 		this.move = (percent) => {
@@ -35,17 +64,12 @@
 				transition : "width "+this.speedAnimation+"s"
 			});
 
-			$("#"+this.wrapperId).css({
-				"height": "5px"
-			});
+			// $("#"+this.wrapperId).css({
+			// 	"height": "5px"
+			// });
 
 			// verify if is 100%
 			setTimeout(() => {
-				console.log("********************************");
-				console.log(this.finishAnimation);
-				console.log(percent == 100);
-				console.log(percent == 100 && this.finishAnimation == true);
-				console.log("********************************");
 
 				if(percent == 100 && this.finishAnimation == true) {
 					console.log("je vais faire l'animation bro");
@@ -78,12 +102,37 @@
 		var setFinishAnimation = (boolean) => {
 			this.finishAnimation = boolean;
 		}
+		var setRounded = (topLeft = 0,topRight = 0,bottomLeft = 0,bottomRight = 0) => {
+
+			this.rounded.topLeft = topLeft || 0;
+			this.rounded.topRight = topRight || 0;
+			this.rounded.bottomLeft = bottomLeft || 0;
+			this.rounded.bottomRight = bottomRight || 0;
+
+			$("#"+this.wrapperId).css({ 
+				"border-top-left-radius" : this.rounded.topLeft+'px',
+				"border-top-right-radius" : this.rounded.topRight+'px',
+				"border-bottom-left-radius" : this.rounded.bottomLeft+'px',
+				"border-bottom-right-radius" : this.rounded.bottomRight+'px'
+			});
+		}
+		var setHeight = (height = 5) => {
+			this.height = height;
+			$("#"+this.wrapperId).css({ 
+				"height" : this.height+'px'
+			});
+			$("."+this.classNameBar).css({ 
+				"height" : this.height+'px'
+			});
+		}
 		
 		let ProBar = {
           setSpeed,
+          setHeight,
           setColor,
           setWrapperColor,
           setFinishAnimation,
+          setRounded,
           goto: (percent,time = null) => {
           	if(time != null) {setSpeed(time)}
           	this.move(percent);
@@ -94,18 +143,20 @@
 	}	
 
 
-	var createBar = ( element,classNameBar,colorBar,wrapperId,wrapper_color ) => {
+	var createBar = ( element,classNameBar,height,colorBar,wrapperId,wrapper_color,rounded ) => {
+		console.log("la hauteur est de "+height);
 		var Css = `
 			.${classNameBar} {
 				width : 0px;
-				height : 5px;
+				height : ${height}px;
 				background-color: ${colorBar};
 			}
 			#${wrapperId} {
 				width : 100%;
-				height : 5px;
+				height : ${height}px;
 				background-color : ${wrapper_color};
     			overflow: hidden;
+    			border-radius : ${rounded.topLeft}px ${rounded.topRight}px ${rounded.bottomLeft}px ${rounded.bottomRight}px;
 			}
 		`;
 
