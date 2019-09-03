@@ -39,6 +39,7 @@
 		}
 		#wrapper-progressBar {
 			position: fixed;
+			z-index: 5;
 		}
 	</style>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css">
@@ -334,7 +335,7 @@ probar.setRoundedInternal(15,15,15,15); // change Border radius of Probar Intern
 	hljs.initHighlightingOnLoad();
 	// options
 	var options = {
-	    color   : "#e74c3c", // color of the Progress bar. 
+	    color   : "#44bd32", // color of the Progress bar. 
 	    bgColor : "#efefef", // color background of the Progress bar
 	    speed   : 0.3, // speed of animation. ( unit in secondes )
 	    wrapper : "body", // the wrapper who append ProBar. if use class => ".class" ,if use id => "#id" 
@@ -444,6 +445,15 @@ probar.setRoundedInternal(15,15,15,15); // change Border radius of Probar Intern
 	// probar.goto(100); // reach 100%.
 	// probar.goto(100,2000); // reach 100% in 2 secondes
 	// probar.setFinishAnimation(false); // remove a finish animation.
+
+	$(window).scroll(function() {
+	  var y = $(this).scrollTop();
+
+	  let percent = (y * 100) / ($(document).height() - $(window).height());
+	  
+	  probar.goto(percent);
+	});
+
 
 </script>
 </body>
