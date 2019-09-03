@@ -10,6 +10,8 @@ ProBar is a progress bar with multiple options.
   - config a "Goto" option with timing.
   - config a Finish animation.
   - cutomize with your own CSS.
+  - config a Height of Probar.
+  - config a Rounded Corners of Probar. 
 
 ### Requirement
 
@@ -47,7 +49,14 @@ var probar = new ProBar(options);
     wrapper : "body", // the wrapper who append ProBar. if class ".class" ,if id "#id" 
     finishAnimation : true || false,  // config a finish animation. 
     classNameBar : "setBar", // change a class to a custom class ( for Css ).
-    wrapperId : "wrapperSetBar" // change a wrapper id for a custom Css.
+    wrapperId : "wrapperSetBar", // change a wrapper id for a custom Css.
+    height:10, // give a height to Probar.
+    rounded : { // use it to round Corners of Probar.
+      topLeft : 25,
+      topRight : 25,
+      bottomLeft : 25,
+      bottomRight : 25 
+    }
 }
 ```
 
@@ -60,6 +69,8 @@ probar.setSpeed(3000); // change Speed to 3 secondes.
 probar.setFinishAnimation(false); // set animation to false.
 probar.goto(100); // reach 100%.
 probar.goto(100,2000); // reach 100% in 2 secondes.
+probar.setHeight(15); // set Height to 15px.
+probar.setRounded(15,15,15,15); // change Border radius of Probar. (topLeft, topRight, bottomLeft, bottomRight);
 ```
 
 #### Upcoming features 
