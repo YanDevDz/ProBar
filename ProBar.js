@@ -27,7 +27,6 @@
 
 		if(this.options.color) { this.colorBar = this.options.color }
 		if(this.options.height) { 
-			console.log(this.options.height);
 			this.height = this.options.height; 
 		}
 		if(this.options.bgColor) { this.wrapper_color = this.options.bgColor }
@@ -64,13 +63,15 @@
 				transition : "width "+this.speedAnimation+"s"
 			});
 
-			// $("#"+this.wrapperId).css({
-			// 	"height": "5px"
-			// });
+			// if animation is true, reInitializate Probar.
+			if(this.finishAnimation == true) {
+				$("#"+this.wrapperId).css({
+					"height": "5px"
+				});
+			}
 
 			// verify if is 100%
 			setTimeout(() => {
-
 				if(percent == 100 && this.finishAnimation == true) {
 					console.log("je vais faire l'animation bro");
 					$("#"+this.wrapperId).css({
