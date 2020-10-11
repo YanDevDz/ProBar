@@ -46,7 +46,7 @@ var probar = new ProBar(options);
 {
     color : "#2a2a2a", // color of the Progress bar. 
     bgColor : "#efefef", // color background of the Progress bar
-    speed 0.3, // speed of animation. ( unit in secondes )
+    speed : 0.3, // speed of animation. ( unit in secondes )
     wrapper : "body", // the wrapper who append ProBar. if class ".class" ,if id "#id" 
     finishAnimation : true || false,  // config a finish animation. 
     classNameBar : "setBar", // change a class to a custom class ( for Css ).
